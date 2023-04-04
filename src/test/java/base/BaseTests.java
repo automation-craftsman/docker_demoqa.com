@@ -41,7 +41,7 @@ public class BaseTests {
         opt.addArguments("--remote-allow-origins=*");
 
         // Making the test headless
-        opt.setHeadless(true);
+//        opt.setHeadless(true);
 
         return opt;
 
