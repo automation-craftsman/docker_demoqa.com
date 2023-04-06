@@ -48,7 +48,8 @@ public class BaseTests {
     }
 
     @AfterClass
-    public void tarDown(){
+    public void tarDown() throws InterruptedException {
+        Thread.sleep(2);
         driver.quit();
     }
 }

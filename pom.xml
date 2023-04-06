@@ -40,11 +40,13 @@
             <artifactId>selenium-http-jdk-client</artifactId>
             <version>4.8.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
             <version>4.8.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>

@@ -28,6 +28,7 @@ public class TextBoxTests extends BaseTests {
 
     @Test
     public void textBoxDataEntryTest(){
+
         var textBox = homepage.openElementsMenu();
 
         textBox.getTextBox();
