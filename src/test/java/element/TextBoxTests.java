@@ -39,7 +39,7 @@ public class TextBoxTests extends BaseTests {
 
         textBox.submitForm();
 
-        String returned_name = textBox.verifyOutput();
+        String returned_name = textBox.verifyTextBoxOutput();
 
         assertTrue(returned_name.contains(name));
 

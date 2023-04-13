@@ -1,7 +1,6 @@
 package element;
 
 import base.BaseTests;
-import modules.elements.CheckBox;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;

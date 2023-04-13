@@ -1,7 +1,5 @@
 package pages;
 
-import modules.elements.TextBox;
-import modules.forms.PracticeForms;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -30,12 +28,6 @@ public class HomePage {
         }
 
         return new Elements(driver);
-    }
-
-    public PracticeForms openFormsMenu(){
-        driver.findElement(forms_dropdown).click();
-
-        return new PracticeForms(driver);
     }
 
     private void getElementIntoView(By element){
