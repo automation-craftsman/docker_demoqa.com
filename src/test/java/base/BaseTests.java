@@ -17,12 +17,8 @@ public class BaseTests {
     @BeforeClass
     public void setUp() {
 
-        // Settings to bypass chromedriver issues with 111.* driver
-        // System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // initiating and launching chrome driver
-        // WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(getChromeOptions());
+        driver = WebDriverManager.chromedriver().capabilities(getChromeOptions()).create();
 
         // maximizing browser window
         driver.manage().window().maximize();
@@ -46,7 +42,7 @@ public class BaseTests {
     }
 
     @AfterClass
-    public void tarDown() throws InterruptedException {
+    public void tearDown() throws InterruptedException {
         Thread.sleep(2);
         driver.quit();
     }
