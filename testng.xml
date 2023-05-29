@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Docker Suite">
+    <test verbose="2" preserve-order="true" name="demoqa.com_automation">
+        <classes>
+            <class name="tests.T001_TextBoxTest">
+                <methods>
+                    <include name="testTextBoxElements"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
