@@ -60,9 +60,10 @@ public class Base {
         } else {
             // Keeping the legacy until we finish the test
             System.out.println("[i] Invalid browser name. Launching Chrome as default.");
-            WebDriverManager.chromedriver().setup();
             ChromeOptions opt = new ChromeOptions();
-            return new ChromeDriver(opt);
+            opt.addArguments("--headless=new");
+            driver = WebDriverManager.chromedriver().capabilities(opt).create();
+            setDriver(driver);
         }
 
         return getDriver();
