@@ -2,12 +2,11 @@ package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import java.io.FileInputStream;
 import java.util.Properties;
@@ -26,6 +25,7 @@ public class Base {
     }
 
     public static WebDriver getDriver(){
+
         return PAGE_DRIVER.get();
     }
 
@@ -37,31 +37,24 @@ public class Base {
      *
      * @return the browser instance defined in the config.properties file
      */
-    public static WebDriver getBrowser(){
-
-        String browserName = prop.getProperty("browser");
+    public static WebDriver getBrowser(String browserName){
 
         if (browserName.equalsIgnoreCase("Chrome")){
-            ChromeOptions opt = new ChromeOptions();
-            opt.addArguments("--headless=new");
-            driver = WebDriverManager.chromedriver().capabilities(opt).create();
+            driver = WebDriverManager.chromedriver().create();
             setDriver(driver);
 
         } else if (browserName.equalsIgnoreCase("Firefox")){
-            FirefoxOptions opt = new FirefoxOptions();
-            driver = WebDriverManager.firefoxdriver().capabilities(opt).create();
+            driver = WebDriverManager.firefoxdriver().create();
             setDriver(driver);
 
         } else if (browserName.equalsIgnoreCase("Edge")){
-            EdgeOptions opt = new EdgeOptions();
-            driver = WebDriverManager.edgedriver().capabilities(opt).create();
+            driver = WebDriverManager.edgedriver().create();
             setDriver(driver);
 
         } else {
-            // Keeping the legacy until we finish the test
             System.out.println("[i] Invalid browser name. Launching Chrome as default.");
             ChromeOptions opt = new ChromeOptions();
-            opt.addArguments("--headless=new");
+//            opt.addArguments("--headless=new");
             driver = WebDriverManager.chromedriver().capabilities(opt).create();
             setDriver(driver);
         }
@@ -90,13 +83,14 @@ public class Base {
     /**
      * Method to initiate the driver
      */
-    @BeforeSuite
-    public static synchronized void setUp(){
-        driver = getBrowser();
+    @Parameters("browser")
+    @BeforeTest
+    public static synchronized void setUp(@Optional("Chrome") String browser){
+        driver = getBrowser(browser);
         driver.manage().window().maximize();
         driver.get(prop.getProperty("url"));
 
-        System.out.println("From BeforeSuite: " + driver);
+        System.out.println("[i] Thread ID > " + Thread.currentThread().threadId() + " | " + "Driver ID > " + getDriver());
     }
 
     /**
@@ -104,12 +98,9 @@ public class Base {
      *
      * @throws InterruptedException
      */
-    @AfterSuite
+    @AfterTest
     public static synchronized void cleanUp() throws InterruptedException {
-        Thread.sleep(3000);
-        System.out.println("Driver in ThreadLocal: " + getDriver());
         getDriver().quit();
-        System.out.println("Driver in ThreadLocal after quiting: " + getDriver());
     }
 
 }
