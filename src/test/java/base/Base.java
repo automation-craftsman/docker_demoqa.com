@@ -40,22 +40,26 @@ public class Base {
     public static WebDriver getBrowser(String browserName){
 
         if (browserName.equalsIgnoreCase("Chrome")){
-            driver = WebDriverManager.chromedriver().create();
+            driver = WebDriverManager.chromedriver()
+                            .remoteAddress(prop.getProperty("remote_address")).create();
             setDriver(driver);
 
         } else if (browserName.equalsIgnoreCase("Firefox")){
-            driver = WebDriverManager.firefoxdriver().create();
+            driver = WebDriverManager.firefoxdriver()
+                    .remoteAddress(prop.getProperty("remote_address")).create();
             setDriver(driver);
 
         } else if (browserName.equalsIgnoreCase("Edge")){
-            driver = WebDriverManager.edgedriver().create();
+            driver = WebDriverManager.edgedriver()
+                    .remoteAddress(prop.getProperty("remote_address")).create();
             setDriver(driver);
 
         } else {
             System.out.println("[i] Invalid browser name. Launching Chrome as default.");
             ChromeOptions opt = new ChromeOptions();
 //            opt.addArguments("--headless=new");
-            driver = WebDriverManager.chromedriver().capabilities(opt).create();
+            driver = WebDriverManager.chromedriver().capabilities(opt)
+                    .remoteAddress(prop.getProperty("remote_address")).create();
             setDriver(driver);
         }
 
